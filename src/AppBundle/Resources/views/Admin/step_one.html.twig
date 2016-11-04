@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">Step 1. Create project</h3>
+            </div>
+            <div id="step_one" class="box-body">
+                {{ form(view) }}
+                <button type="button" class="btn btn-success pull-right">Next</button>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <script>
+        $( document ).ready(function() {
+
+            function onSuccess(rsp)
+            {
+                if(rsp && rsp['next_step'])
+                console.log('success',rsp);
+                window.location.href = rsp['next_step'];
+            }
+
+            function onError()
+            {
+                console.log('error')
+            }
+
+            $(document).on('click','button.btn-success', function () {
+                console.log('button clicked')
+
+                var url = '{{ path('website_setup_step_one_save') }}';
+                var params = $('#step_one form').serialize();
+                var jxhr = $.ajax(url,{type: 'POST',data: params});
+
+                jxhr.success(onSuccess);
+                jxhr.error(onError);
+            })
+        });
+
+    </script>
+</div>

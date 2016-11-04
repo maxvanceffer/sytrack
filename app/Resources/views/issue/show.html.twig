@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Issue</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ issue.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ issue.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ issue.description }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ issue.type }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ issue.status }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ issue.priority }}</td>
+            </tr>
+            <tr>
+                <th>Reportedby</th>
+                <td>{{ issue.reportedBy }}</td>
+            </tr>
+            <tr>
+                <th>Resolvedby</th>
+                <td>{{ issue.resolvedBy }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if issue.createdAt %}{{ issue.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if issue.updatedAt %}{{ issue.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Component</th>
+                <td>{{ issue.component }}</td>
+            </tr>
+            <tr>
+                <th>Affectversion</th>
+                <td>{{ issue.affectVersion }}</td>
+            </tr>
+            <tr>
+                <th>Fixversion</th>
+                <td>{{ issue.fixVersion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('issue_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('issue_edit', { 'id': issue.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
