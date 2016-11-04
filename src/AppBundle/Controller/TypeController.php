@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Type controller.
  *
- * @Route("type")
+ * @Route("/admin/type")
  */
 class TypeController extends Controller
 {

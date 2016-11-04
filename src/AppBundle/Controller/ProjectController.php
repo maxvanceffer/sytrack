@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Project controller.
  *
- * @Route("project")
+ * @Route("/admin/project")
  */
 class ProjectController extends Controller
 {

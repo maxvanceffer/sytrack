@@ -4,5 +4,10 @@ parameters:
 #    parameter_name: value
 
 services:
+    # All parts of site must this service to get current website configuration
+    app.configuration:
+        class: AppBundle\Services\Configuration
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+
     app.form.error_serialize:
         class: AppBundle\Services\FormErrorsSerializer

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Issue controller.
  *
- * @Route("issue")
+ * @Route("/admin/issue")
  */
 class IssueController extends Controller
 {
