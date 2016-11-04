@@ -1,30 +1,15 @@
-{#<!DOCTYPE html>#}
-{#<html>#}
-    {#<head>#}
-        {#<meta charset="UTF-8" />#}
-        {#<title>{% block title %}Vuk - VK client{% endblock %}</title>#}
-        {#{% block stylesheets %}{% endblock %}#}
-        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
-    {#</head>#}
-    {#<body>#}
-        {#{% block body %}{% endblock %}#}
-        {#{% block javascripts %}{% endblock %}#}
-    {#</body>#}
-{#</html>#}
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <title>New Age - Start Bootstrap Theme</title>
+    <title>
+        {% block title %}page_title{% endblock %}
+    </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('/bundles/front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -53,6 +38,7 @@
 
 <body id="page-top">
 
+{% block navigation %}
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -60,7 +46,9 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand page-scroll" href="#page-top">
+                <h2 style="font-weight: bolder; margin: 0 !important;">{{ config.project.title }}</h2>
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -84,15 +72,17 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+{% endblock %}
 
+{% block header %}
 <header>
     <div class="container">
         <div class="row">
             <div class="col-sm-7">
                 <div class="header-content">
                     <div class="header-content-inner">
-                        <h1>New Age is an app landing page that will help you beautifully showcase your new mobile app, or anything else!</h1>
-                        <a href="#download" class="btn btn-outline btn-xl page-scroll">Start Now for Free!</a>
+                        <h1>{% trans %} is an app landing page that will help you beautifully showcase your new mobile app, or anything else!{% endtrans %}</h1>
+                        <a href="#download" class="btn btn-outline btn-xl page-scroll">{% trans %}Start Now for Free!{% endtrans %}</a>
                     </div>
                 </div>
             </div>
@@ -114,13 +104,15 @@
         </div>
     </div>
 </header>
+{% endblock %}
 
+{% block body %}
 <section id="download" class="download bg-primary text-center">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h2 class="section-heading">Discover what all the buzz is about!</h2>
-                <p>Our app is available on any mobile device! Download now to get started!</p>
+                <h2 class="section-heading">{% trans %}download_section_title{% endtrans %}</h2>
+                <p>{% trans %}download_section_description{% endtrans %}</p>
                 <div class="badges">
                     <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
                     <a class="badge-link" href="#"><img src="img/app-store-badge.svg" alt=""></a>
@@ -193,6 +185,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 <section class="cta">
@@ -221,6 +214,7 @@
         </ul>
     </div>
 </section>
+{% endblock %}
 
 <footer>
     <div class="container">
