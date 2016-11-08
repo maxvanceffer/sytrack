@@ -85,7 +85,7 @@ class WebsiteConfig
     }
 
     /**
-     * @return mixed
+     * @return Project
      */
     public function getProject()
     {

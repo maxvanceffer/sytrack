@@ -2,11 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Criteria\IssueCriteria;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\WebsiteConfig;
 use AppBundle\Form\ProjectType;
 use AppBundle\Form\WebsiteConfigType;
 use AppBundle\Entity\Version;
+use Doctrine\ORM\Query;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,15 +28,42 @@ class AdminController extends Controller
      */
     public function dashboardAction()
     {
+        /** @var WebsiteConfig $configure */
         $configure = $this
             ->getManager()
             ->getRepository('AppBundle:WebsiteConfig')
             ->findOneBy(array('current' => 1));
 
+        $openStatus = $this->getManager()
+            ->getRepository('AppBundle:Status')
+            ->findOneBy(array('title' => 'Open'));
+
+        $closedStatus= $this->getManager()
+            ->getRepository('AppBundle:Status')
+            ->findOneBy(array('title' => 'Resolved'));
+
+        $criteria = new IssueCriteria();
+        $criteria->version = $configure->getProject()->getCurrentVersion();
+        $criteria->hydrateMode = Query::HYDRATE_ARRAY;
+
+        $issues = $this->getManager()
+            ->getRepository('AppBundle:Issue')
+            ->match($criteria);
+
+        $criteria->status = $openStatus;
+        $in_progress = $this->getManager()
+            ->getRepository('AppBundle:Issue')
+            ->match($criteria);
+
+        $criteria->status = $closedStatus;
+        $fixed = $this->getManager()
+            ->getRepository('AppBundle:Issue')
+            ->match($criteria);
+
         if(null === $configure)
             $configure = new WebsiteConfig();
 
-        return $this->render('AppBundle:admin:dashboard.html.twig', compact('configure'));
+        return $this->render('AppBundle:admin:dashboard.html.twig', compact('configure', 'issues','in_progress', 'fixed'));
     }
 
     /**
