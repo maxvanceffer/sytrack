@@ -34,7 +34,7 @@ class AdminController extends Controller
         if(null === $configure)
             $configure = new WebsiteConfig();
 
-        return $this->render('AppBundle:Admin:dashboard.html.twig', compact('configure'));
+        return $this->render('AppBundle:admin:dashboard.html.twig', compact('configure'));
     }
 
     /**
@@ -60,7 +60,7 @@ class AdminController extends Controller
         $form   = $this->createForm(ProjectType::class, new Project());
         $view   = $form->createView();
 
-        return $this->render('AppBundle:Admin:step_one.html.twig', compact('view'));
+        return $this->render('AppBundle:admin:step_one.html.twig', compact('view'));
     }
 
     /**
@@ -102,7 +102,7 @@ class AdminController extends Controller
         $em->persist($webconfig);
         $em->flush();
 
-        return $this->render('AppBundle:Admin:step_two.html.twig');
+        return $this->render('AppBundle:admin:step_two.html.twig');
     }
 
     public function getManager()

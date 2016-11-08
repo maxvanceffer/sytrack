@@ -29,7 +29,7 @@ class IssueController extends Controller
 
         $issues = $em->getRepository('AppBundle:Issue')->findAll();
 
-        return $this->render('issue/index.html.twig', array(
+        return $this->render('AppBundle:issue:index.html.twig', array(
             'issues' => $issues,
         ));
     }
