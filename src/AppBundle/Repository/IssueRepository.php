@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 use AppBundle\Criteria\IssueCriteria;
 use AppBundle\Entity\Project;
+use AppBundle\Entity\WebsiteConfig;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 
@@ -18,6 +19,18 @@ class IssueRepository extends EntityRepository implements BaseRepository
     public function countCurrentIssues(Project $project)
     {
 
+    }
+
+    public function indexIssues(WebsiteConfig $config)
+    {
+        $qb = $this->createQueryBuilder('i');
+        return $qb->leftJoin('i.status','status')
+            ->orderBy('status.id','ASC')
+            ->where('i.fixVersion = :version')
+            ->setParameter('version', $config->getCurrentVersion())
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -36,6 +49,10 @@ class IssueRepository extends EntityRepository implements BaseRepository
 
         if($criteria->version !== null) {
             $this->matchStatus($qb, $criteria);
+        }
+
+        if($criteria->sortBy !== null) {
+            $this->matchSort($qb, $criteria);
         }
 
         return $qb->getQuery()->getResult($criteria->hydrateMode);

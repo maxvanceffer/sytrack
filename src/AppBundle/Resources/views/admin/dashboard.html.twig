@@ -3,61 +3,76 @@
 {% block title %}{{ configure.project.title }} dashboard{% endblock %}
 
 {% block body %}
+    <!-- Small boxes (Stat box) -->
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{ configure.project.currentVersion }}</h3>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">{% trans %}Development version{% endtrans %}</span>
-                    <span class="info-box-number">{{ configure.project.currentVersion }}</span>
+                    <p>{% trans %}Development version{% endtrans %}</p>
                 </div>
-                <!-- /.info-box-content -->
+                <div class="icon">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ issues|length }}</h3>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">{% trans %}Issues{% endtrans %}</span>
-                    <span class="info-box-number">{{ issues|length }}</span>
+                    <p>{% trans %}Open issues{% endtrans %}</p>
                 </div>
-                <!-- /.info-box-content -->
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ in_progress|length }}</h3>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">{% trans %}In progress issues{% endtrans %}</span>
-                    <span class="info-box-number">{{ in_progress|length }}</span>
+                    <p>{% trans %}In progress issues{% endtrans %}</p>
                 </div>
-                <!-- /.info-box-content -->
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ fixed|length }}</h3>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">{% trans %}Fixed issues{% endtrans %}</span>
-                    <span class="info-box-number">{{ fixed|length }}</span>
+                    <p>{% trans %}Fixed issues{% endtrans %}</p>
                 </div>
-                <!-- /.info-box-content -->
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <!-- /.info-box -->
         </div>
-        <!-- /.col -->
+        <!-- ./col -->
     </div>
     <!-- /.row -->
-
-    <!-- =========================================================== -->
 {% endblock %}

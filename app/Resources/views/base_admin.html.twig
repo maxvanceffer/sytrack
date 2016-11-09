@@ -360,12 +360,14 @@
                         <li><a href="layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
                     </ul>
                 </li>
-                <li class="active">
-                    <a href="widgets.html">
-                        <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
+                <li {% block issue_menu_li %}{% endblock %}>
+                    <a href="{{ path('issue_index') }}">
+                        <i class="fa fa-th"></i> <span>Issues</span>
+                        {% if in_progress|length %}
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-green">{{ in_progress|length }}</small>
+                        </span>
+                        {% endif %}
                     </a>
                 </li>
                 <li class="treeview">
@@ -746,10 +748,13 @@
 <!-- ./wrapper -->
 
 <!-- Backbone & Marionette -->
-{#{% javascripts#}
-    {#'@AppBundle/Resources/public/js/*'#}
-{#%}#}
-    {#<script src="{{ asset_url }}"></script>#}
-{#{% endjavascripts %}#}
+{% block javascripts %}
+    {% javascripts '@AppBundle/Resources/public/js/*' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block application %}
+{% endblock %}
 </body>
 </html>

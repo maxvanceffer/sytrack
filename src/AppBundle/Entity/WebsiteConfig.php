@@ -115,5 +115,10 @@ class WebsiteConfig
     {
         $this->current = $current;
     }
+
+    public function currentVersion()
+    {
+        return $this->project->getCurrentVersion();
+    }
 }
 

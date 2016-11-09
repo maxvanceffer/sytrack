@@ -16,5 +16,9 @@ class IssueCriteria
 
     public $status;
 
+    public $sortBy;
+
+    public $sortOrder = 'ASC';
+
     public $hydrateMode = Query::HYDRATE_OBJECT;
 }

@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Criteria\IssueCriteria;
 use AppBundle\Entity\Issue;
+use AppBundle\Repository\IssueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,9 +27,12 @@ class IssueController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getManager();
+        $config = $this->get('app.configuration')->configuration();
 
-        $issues = $em->getRepository('AppBundle:Issue')->findAll();
+        $em   = $this->getManager();
+        /** @var IssueRepository $repo */
+        $repo = $em->getRepository('AppBundle:Issue');
+        $issues = $repo->indexIssues();
 
         return $this->render('AppBundle:issue:index.html.twig', array(
             'issues' => $issues,

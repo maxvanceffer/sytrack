@@ -1,61 +1,48 @@
 {% extends '::base_admin.html.twig' %}
 
+{% block issue_menu_li %}class="active"{% endif %}
+
 {% block body %}
-    <h1>Issues list</h1>
+    <div id="issues-region">
+            <div class="issue-table"></div>
+            <div class="issue-paginator"></div>
+    </div>
+{% endblock %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Priority</th>
-                <th>Reportedby</th>
-                <th>Resolvedby</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Component</th>
-                <th>Affectversion</th>
-                <th>Fixversion</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for issue in issues %}
-            <tr>
-                <td><a href="{{ path('issue_show', { 'id': issue.id }) }}">{{ issue.id }}</a></td>
-                <td>{{ issue.title }}</td>
-                <td>{{ issue.description }}</td>
-                <td>{{ issue.type }}</td>
-                <td>{{ issue.status }}</td>
-                <td>{{ issue.priority }}</td>
-                <td>{{ issue.reportedBy }}</td>
-                <td>{{ issue.resolvedBy }}</td>
-                <td>{% if issue.createdAt %}{{ issue.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if issue.updatedAt %}{{ issue.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ issue.component }}</td>
-                <td>{{ issue.affectVersion }}</td>
-                <td>{{ issue.fixVersion }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('issue_show', { 'id': issue.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('issue_edit', { 'id': issue.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block application %}
+    <script type="text/html" id="cart-view">
+        <div class="col-md-5 col-sm-12">
+            <div class="bigcart"></div>
+            <h1>Your shopping cart</h1>
+            <p>
+                Adjust your order if needed
+            </p>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('issue_new') }}">Create a new issue</a>
+        <div class="col-md-7 col-sm-12 text-left">
+            <ul class="items">
+            </ul>
+            <ul>
+                <li class="row totals">
+                    <span class="itemName">Total:</span>
+                    <span class="price"></span>
+                    <span class="order"><a class="text-center">ORDER</a></span>
+                </li>
+            </ul>
+        </div>
+    </script>
+
+    <script type="text/html" id="cart-item-view">
+        <li class="row">
+            <span class="quantity">
+                <input type="number" placeholder="Number of items..." value="<%- 1 %>">
+            </span>
+            <span class="itemName"><%- %></span>
+            <span class="price"></span>
         </li>
-    </ul>
+    </script>
+
+    <script type="javascript" src="{{ asset('@bundles/app/js/issue_models.js') }}"></script>
+    <script type="javascript" src="{{ asset('@bundles/app/js/issue_view.js') }}"></script>
+    <script type="javascript" src="{{ asset('@bundles/app/js/application.js') }}"></script>
 {% endblock %}
