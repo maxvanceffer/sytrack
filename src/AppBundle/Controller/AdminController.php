@@ -34,6 +34,9 @@ class AdminController extends Controller
             ->getRepository('AppBundle:WebsiteConfig')
             ->findOneBy(array('current' => 1));
 
+	if(is_null($configure)) 
+		return $this->redirectToRoute('website_setup_step_one');
+
         $openStatus = $this->getManager()
             ->getRepository('AppBundle:Status')
             ->findOneBy(array('title' => 'Open'));
@@ -42,8 +45,9 @@ class AdminController extends Controller
             ->getRepository('AppBundle:Status')
             ->findOneBy(array('title' => 'Resolved'));
 
+	$project  = $configure->getProject();
         $criteria = new IssueCriteria();
-        $criteria->version = $configure->getProject()->getCurrentVersion();
+        $criteria->version = $project ? $project->getCurrentVersion() : 0.00;
         $criteria->hydrateMode = Query::HYDRATE_ARRAY;
 
         $issues = $this->getManager()
